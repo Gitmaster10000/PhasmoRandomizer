@@ -1,0 +1,12 @@
+C:\Users\Lucas\source\repos\PhasmoRandomizer\PhasmoRandomizer\bin\Debug\ReadMe.txt
+C:\Users\Lucas\source\repos\PhasmoRandomizer\PhasmoRandomizer\bin\Debug\PhasmoSettings.json
+C:\Users\Lucas\source\repos\PhasmoRandomizer\PhasmoRandomizer\bin\Debug\PhasmoRandomizer.exe.config
+C:\Users\Lucas\source\repos\PhasmoRandomizer\PhasmoRandomizer\bin\Debug\PhasmoRandomizer.exe
+C:\Users\Lucas\source\repos\PhasmoRandomizer\PhasmoRandomizer\bin\Debug\PhasmoRandomizer.pdb
+C:\Users\Lucas\source\repos\PhasmoRandomizer\PhasmoRandomizer\obj\Debug\PhasmoRandomizer.csprojAssemblyReference.cache
+C:\Users\Lucas\source\repos\PhasmoRandomizer\PhasmoRandomizer\obj\Debug\PhasmoRandomizer.PhasmoRandomizer.resources
+C:\Users\Lucas\source\repos\PhasmoRandomizer\PhasmoRandomizer\obj\Debug\PhasmoRandomizer.Properties.Resources.resources
+C:\Users\Lucas\source\repos\PhasmoRandomizer\PhasmoRandomizer\obj\Debug\PhasmoRandomizer.csproj.GenerateResource.cache
+C:\Users\Lucas\source\repos\PhasmoRandomizer\PhasmoRandomizer\obj\Debug\PhasmoRandomizer.csproj.CoreCompileInputs.cache
+C:\Users\Lucas\source\repos\PhasmoRandomizer\PhasmoRandomizer\obj\Debug\PhasmoRandomizer.exe
+C:\Users\Lucas\source\repos\PhasmoRandomizer\PhasmoRandomizer\obj\Debug\PhasmoRandomizer.pdb

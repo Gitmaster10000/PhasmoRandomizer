@@ -1,0 +1,45 @@
+{
+  "minPlayerCount": 1,
+  "maxPlayerCount": 4,
+  "maxItemRerolls": 3,
+  "availableMaps": [
+    "Tanglewood",
+    "Edgefield",
+    "Ridgeview",
+    "Grafton",
+    "Bleadsdale",
+    "High school",
+    "Asylum"
+  ],
+  "availableItems": {
+    "Flashlight": 4,
+    "EMF Reader": 2,
+    "Photo Camera": 3,
+    "Lighter": 2,
+    "Candle": 4,
+    "UV Light": 2,
+    "Crucifix": 2,
+    "Video Camera": 6,
+    "Spirit Box": 2,
+    "Salt": 2,
+    "Smudge Sticks": 4,
+    "Strong Flashlight": 4,
+    "Thermometer": 3,
+    "Sanity Pills": 4,
+    "Ghost Writing Book": 2,
+    "Glowstick": 2,
+    "Tripod": 5,
+    "Motion Sensor": 4,
+    "Sound Sensor": 4,
+    "Infrared Light Sensor": 4,
+    "Parabolic Microphone": 2,
+    "Head-Mounted Camera": 4
+  },
+  "playerNames": [
+    "Player 1",
+    "Player 2",
+    "Player 3",
+    "Player 4"
+  ],
+  "playerCanHaveDoubleItems": "false"
+}
