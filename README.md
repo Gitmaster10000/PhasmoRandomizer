@@ -25,6 +25,7 @@ Usage:
 5. Press New if you want to make a new game
 
 Hints:
+- Check out the dark mode version, it might look better to you.
 - You can roll all items at once with the "Roll all" button
 - You can define how many items are rolled for every player in the item tab, but it will be grayed out after rolling the first item.
 - You can reroll items with the button below the item grid. In order to reroll an item, you have to select it in the grid before!
