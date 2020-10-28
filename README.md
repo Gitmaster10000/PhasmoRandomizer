@@ -39,6 +39,7 @@ Hints:
 - Reroll item will never roll to the same item (or to an item the player already has if playerCanHaveDoubleItems is false).
 - The PlayerCanHaveDoubleItems config will prevent that one player can roll the same item multiple times if it is false. 
   Although different players can still roll the same item (for example everyone rolling flashlight will work).
+- All items have the same probability to be rolled. The cap in the config file only says how often it can be rolled in total.
 
 PhasmoSettings.Json config file:
 This config file is used so everyone can customize the randomized values on their own.
