@@ -14,6 +14,7 @@ In order to get rid of the warning when starting the randomizer you have to do f
    -Right-click on the file and select "Properties" from the menu.
    -Click "Unblock" on the General tab.
    -Click OK
+
 To ensure that the application is not doing some weird stuff, I made it public on GitHub.
 The code is open source and you can read, download and compile it to your hearts content :D.
 
