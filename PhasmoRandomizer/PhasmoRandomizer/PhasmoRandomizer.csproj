@@ -46,6 +46,12 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PhasmoConfigDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhasmoConfigDialog.Designer.cs">
+      <DependentUpon>PhasmoConfigDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhasmoRandomizer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +60,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PhasmoConfigDialog.resx">
+      <DependentUpon>PhasmoConfigDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PhasmoRandomizer.resx">
       <DependentUpon>PhasmoRandomizer.cs</DependentUpon>
     </EmbeddedResource>
@@ -85,6 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <Content Include="Changelog.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ReadMe.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace PhasmoRandomizer
 {
@@ -56,34 +55,6 @@ namespace PhasmoRandomizer
             ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.Black, ButtonBorderStyle.Solid);
         }
 
-        [DllImport("user32.dll")]
-        static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
-
-        [DllImport("User32.dll")]
-
-        private static extern IntPtr GetWindowDC(IntPtr hWnd);
-
-        protected override void WndProc(ref System.Windows.Forms.Message m)
-        {
-            const int WM_NCPAINT = 0x85;
-            base.WndProc(ref m);
-
-            if (m.Msg == WM_NCPAINT)
-            {
-
-                IntPtr hdc = GetWindowDC(m.HWnd);
-                if ((int)hdc != 0)
-                {
-                    Graphics g = Graphics.FromHdc(hdc);
-                    g.DrawLine(Pens.Green, 10, 10, 100, 10);
-                    g.Flush();
-                    ReleaseDC(m.HWnd, hdc);
-                }
-
-            }
-
-        }
-
         private void textBoxMaxItems_TextChanged(object sender, EventArgs e)
         {
             try
@@ -95,14 +66,26 @@ namespace PhasmoRandomizer
                 textBoxMaxItems.Text = "3";
             }
         }
+
+        private void buttonConfig_Click(object sender, EventArgs e)
+        {
+            PhasmoConfigDialog configDialog = new PhasmoConfigDialog(config);
+            if (configDialog.ShowConfigDialog() == DialogResult.OK)
+            {
+                config = configDialog.GetConfiguration();
+            }
+        }
         private void buttonRollPlayers_Click(object sender, EventArgs e)
         {
             if (config != null)
             {
-                rolledPlayerCount = rng.Next(config.MinPlayerCount, config.MaxPlayerCount + 1);
+                int min = config.MinPlayerCount < 1 ? 1 : config.MinPlayerCount;
+                int max = config.MaxPlayerCount < config.MinPlayerCount ? config.MinPlayerCount : config.MaxPlayerCount;
+                rolledPlayerCount = rng.Next(min, max + 1);
                 labelPlayerCount.Text = "Players: "+rolledPlayerCount;
                 buttonRollPlayers.Visible = false;
                 tabPageMap.Enabled = true;
+                tabPageItem.Enabled = true;
                 tabControlMain.Refresh();
             }
         }
@@ -111,16 +94,24 @@ namespace PhasmoRandomizer
         {
             if (config != null)
             {
-                rolledMap = config.AvailableMaps[rng.Next(1, config.AvailableMaps.Count + 1) - 1];
-                labelMap.Text = "Map: "+ rolledMap;
-                buttonRollMap.Visible = false;
-                tabPageItem.Enabled = true;
-                tabControlMain.Refresh();
+                List<string> mapPool = config.AvailableMaps.Keys.Where(x => config.AvailableMaps[x]).ToList();
+                if (mapPool.Count > 0)
+                {
+                    rolledMap = mapPool[rng.Next(1, mapPool.Count + 1) - 1];
+                    labelMap.Text = "Map: " + rolledMap;
+                    buttonRollMap.Visible = false;
+                    tabControlMain.Refresh();
+                }
+                else
+                {
+                    labelMap.Text = "No map available in config!";
+                }
             }
         }
 
         private void RollItems(bool keepRolling)
         {
+
             do
             {
                 if (currentRolledItemCount <= 0)
@@ -141,6 +132,14 @@ namespace PhasmoRandomizer
                             currentItemPool.Remove(iRoll);
                         }
                     }
+                }
+
+                if (currentItemPool.Count <= 0)
+                {
+                    buttonRollItems.Visible = false;
+                    buttonRollAll.Text = "Clipboard";
+                    itemRollsCompleted = true;
+                    return;
                 }
                 string rolledItemName = currentItemPool[rng.Next(1, currentItemPool.Count + 1) - 1];
 
@@ -258,9 +257,6 @@ namespace PhasmoRandomizer
                 {
                     //copy to clipboard function
                     string clipBoardText = string.Empty;
-                    clipBoardText += "Players: " + rolledPlayerCount + "\n";
-                    clipBoardText += "Map: " + rolledMap + "\n";
-                    clipBoardText += "Items:\n";
                     foreach (var item in rolledItemList)
                     {
                         clipBoardText += item.Player + ": " + item.Item+"\n";
@@ -311,11 +307,15 @@ namespace PhasmoRandomizer
                         "Config file not found.\nPlease make sure to locate the PhasmoSettings.json in the same folder as the .exe file!\nYou can press continue and the default config will be used.");
                 }
             }
+            else
+            {
+                config = defaultConfig;
+            }
         }
 
         private void buttonNew_Click(object sender, EventArgs e)
         {
-            LoadJsonConfig();
+            //LoadJsonConfig();
             if (config != null)
             {
                 rolledItemDictionary.Clear();
@@ -326,7 +326,14 @@ namespace PhasmoRandomizer
                 itemRollsCompleted = false;
                 tabPageItem.Enabled = false;
                 rolledItemList.Clear();
-                itemPool = new Dictionary<string, int>(config.AvailableItems);
+                itemPool.Clear();
+                foreach (var item in config.AvailableItems)
+                {
+                    if (item.Value > 0)
+                    {
+                        itemPool.Add(item.Key,item.Value);
+                    }    
+                }
                 labelPlayerCount.Text = string.Empty;
                 labelMap.Text = string.Empty;
                 dataGridView1.DataSource = null;
@@ -344,6 +351,15 @@ namespace PhasmoRandomizer
                 {
                     buttonReroll.Enabled = true;
                     buttonReroll.Visible = true;
+                }
+
+                if (config.MinPlayerCount == config.MaxPlayerCount)
+                {
+                    labelPlayerCount.Text = "Players: " + config.MinPlayerCount;
+                    buttonRollPlayers.Visible = false;
+                    tabPageMap.Enabled = true;
+                    tabPageItem.Enabled = true;
+                    tabControlMain.Refresh();
                 }
             }
         }
@@ -374,15 +390,15 @@ namespace PhasmoRandomizer
             defaultConfig.MaxPlayerCount = 4;
             defaultConfig.MaxItemRerolls = 3;
             defaultConfig.PlayerCanHaveDoubleItems = false;
-            defaultConfig.AvailableMaps = new List<string>
+            defaultConfig.AvailableMaps = new Dictionary<string, bool>
             {
-                "Tanglewood",
-                "Edgefield",
-                "Ridgeview",
-                "Grafton",
-                "Bleadsdale",
-                "High school",
-                "Asylum"
+                {"Tanglewood",true},
+                {"Edgefield",true},
+                {"Ridgeview",true},
+                {"Grafton",true},
+                {"Bleasdale",true},
+                {"High school",true},
+                {"Asylum",true}
             };
             defaultConfig.AvailableItems = new Dictionary<string, int>
             {
@@ -447,7 +463,7 @@ namespace PhasmoRandomizer
         public int MinPlayerCount;
         public int MaxPlayerCount;
         public int MaxItemRerolls;
-        public List<string> AvailableMaps;
+        public Dictionary<string, bool> AvailableMaps;
         public Dictionary<string, int> AvailableItems;
         public List<string> PlayerNames;
         public bool PlayerCanHaveDoubleItems;
