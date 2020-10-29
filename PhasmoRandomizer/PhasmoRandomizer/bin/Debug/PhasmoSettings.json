@@ -2,15 +2,15 @@
   "minPlayerCount": 1,
   "maxPlayerCount": 4,
   "maxItemRerolls": 3,
-  "availableMaps": [
-    "Tanglewood",
-    "Edgefield",
-    "Ridgeview",
-    "Grafton",
-    "Bleadsdale",
-    "High school",
-    "Asylum"
-  ],
+  "availableMaps": {
+    "Tanglewood": "true",
+    "Edgefield": "true",
+    "Ridgeview": "true",
+    "Grafton": "true",
+    "Bleasdale": "true",
+    "High school": "true",
+    "Asylum": "true"
+  },
   "availableItems": {
     "Flashlight": 4,
     "EMF Reader": 2,
