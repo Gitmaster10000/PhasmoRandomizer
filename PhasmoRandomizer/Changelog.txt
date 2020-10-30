@@ -1,0 +1,4 @@
+v1.0: Initial Version of the randomizer
+v1.1: Created dark mode
+v2.0: Added config dialog to the randomizer which allows to customize stuff even faster and save/load configs
+v3.0: Added spinning wheels to the randomizer, which can be disabled in config file.
