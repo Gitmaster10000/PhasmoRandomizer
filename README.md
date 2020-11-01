@@ -8,16 +8,6 @@ The application consists of 3 randomized factors, which are player count, map an
 In order to use the application it has to load a config file called PhasmoSettings.json.
 Simply unzip everything to the same folder and it should work fine.
 
-Preview pictures:
-Map wheel
-![alt text](https://i.imgur.com/tL7UPT8.jpg)
-Item wheel
-![alt text](https://i.imgur.com/PaRZCwI.jpg)
-Item grid
-![alt text](https://i.imgur.com/SWB1kcb.jpg)
-Config dialog
-![alt text](https://i.imgur.com/kQ0O97M.jpg)
-
 Security:
 This application is not certified and will therefor be untrusted by your computer.
 In order to get rid of the warning when starting the randomizer you have to do following steps:
@@ -72,3 +62,17 @@ Thanks to Insym for inventing this game mode.
 Check out his twitch or youtube: 
 https://www.twitch.tv/insym 
 https://www.youtube.com/channel/UC5uNya42ayhsRnZOR3mO6NA
+
+Preview pictures:
+Map wheel
+
+![alt text](https://i.imgur.com/tL7UPT8.jpg)
+Item wheel
+
+![alt text](https://i.imgur.com/PaRZCwI.jpg)
+Item grid
+
+![alt text](https://i.imgur.com/SWB1kcb.jpg)
+Config dialog
+
+![alt text](https://i.imgur.com/kQ0O97M.jpg)
