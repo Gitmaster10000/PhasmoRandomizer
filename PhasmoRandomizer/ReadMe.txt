@@ -13,11 +13,12 @@ In order to get rid of the warning when starting the randomizer you have to do f
    -Right-click on the file and select "Properties" from the menu.
    -Click "Unblock" on the General tab.
    -Click OK
+
 To ensure that the application is not doing some weird stuff, I made it public on GitHub.
 The code is open source and you can read, download and compile it to your hearts content :D.
 
 Usage:
-1. Make sure the PhasmoRandomizer.exe and PhasmoSettings.json file are located in the same folder
+1. Make sure the PhasmoRandomizer.exe, the PhasmoSettings.json file and all .dll files are located in the same folder!
 2. Open the PhasmoRandomizer.exe
 (3. If the PhasmoSettings.json file can't be loaded then open it manually in the open file dialog which appears.)
 4. Press Roll buttons for players, map and items
@@ -53,6 +54,8 @@ json file in a notepad.
 If new maps or items are added to the game, then they have to be added via notepad.
 I will try to keep the config file updated, but it might be outdated at some point and you have to modify it.
 
+Requirements:
+- .Net Framework 4.7.2 (with windows 10 you automatically have this).
 
 Thanks to Insym for inventing this game mode.
 Check out his twitch or youtube: https://www.twitch.tv/insym 

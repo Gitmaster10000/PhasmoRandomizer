@@ -37,6 +37,7 @@ namespace PhasmoRandomizer
             if (config != null)
             {
                 currentItemRerollCnt = config.MaxItemRerolls;
+                rolledPlayerCount = config.MinPlayerCount; //initialize rolledPlayers with the min to prevent bugs
                 buttonReroll.Text = "Roll selected item again (" + currentItemRerollCnt + ")";
                 if (currentItemRerollCnt > 0)
                 {
@@ -63,6 +64,12 @@ namespace PhasmoRandomizer
                     labelPlayerCount.Visible = false;
                     playerWheel.Visible = true;
                 }
+                else
+                {
+                    tableLayoutPanel7.ColumnStyles[0].SizeType = SizeType.Percent;
+                    tableLayoutPanel7.ColumnStyles[0].Width = 100F;
+                    labelPlayerCount.Size = tableLayoutPanel7.Size;
+                }
                 labelMap.Visible = false;
                 mapWheel.Visible = true;
                 DrawMapWheel();
@@ -75,6 +82,16 @@ namespace PhasmoRandomizer
                 tableLayoutPanel8.ColumnStyles[0].SizeType = SizeType.Percent;
                 tableLayoutPanel8.ColumnStyles[0].Width = 100F;
                 labelMap.Size = tableLayoutPanel8.Size;
+            }
+
+            if (config.MinPlayerCount == config.MaxPlayerCount)
+            {
+                labelPlayerCount.Text = "Players: " + config.MinPlayerCount;
+                rolledPlayerCount = config.MinPlayerCount;
+                buttonRollPlayers.Visible = false;
+                tabPageMap.Enabled = true;
+                tabPageItem.Enabled = true;
+                tabControlMain.Refresh();
             }
 
             if (dataGridView1.Visible)
@@ -223,7 +240,14 @@ namespace PhasmoRandomizer
                 textBoxMaxItems.ReadOnly = true;
                 textBoxMaxItems.Enabled = false;
                 item.Id = rolledItemList.Count;
-                item.Player = config.PlayerNames[currentRollingPlayer - 1];
+                if (currentRollingPlayer <= config.PlayerNames.Count)
+                {
+                    item.Player = config.PlayerNames[currentRollingPlayer - 1];
+                }
+                else
+                {
+                    item.Player = "Player " + currentRollingPlayer;
+                }
                 List<string> currentItemPool = new List<string>(itemPool.Keys.ToList());
                 if (!config.PlayerCanHaveDoubleItems)
                 {
@@ -499,6 +523,7 @@ namespace PhasmoRandomizer
                 if (config.MinPlayerCount == config.MaxPlayerCount)
                 {
                     labelPlayerCount.Text = "Players: " + config.MinPlayerCount;
+                    rolledPlayerCount = config.MinPlayerCount;
                     buttonRollPlayers.Visible = false;
                     tabPageMap.Enabled = true;
                     tabPageItem.Enabled = true;
@@ -506,18 +531,25 @@ namespace PhasmoRandomizer
                 }
                 if (config.SpinningWheel)
                 {
-                    labelMap.Visible = false;
                     if (config.MinPlayerCount != config.MaxPlayerCount)
                     {
                         DrawPlayerWheel();
                         labelPlayerCount.Visible = false;
                         playerWheel.Visible = true;
+                        tableLayoutPanel7.ColumnStyles[0].SizeType = SizeType.AutoSize;
+                        tableLayoutPanel7.ColumnStyles[0].Width = 0;
+                    }
+                    else
+                    {
+                        tableLayoutPanel7.ColumnStyles[0].SizeType = SizeType.Percent;
+                        tableLayoutPanel7.ColumnStyles[0].Width = 100F;
+                        labelPlayerCount.Size = tableLayoutPanel7.Size;
+                        labelPlayerCount.Visible = true;
+                        playerWheel.Visible = false;
                     }
                     labelMap.Visible = false;
                     mapWheel.Visible = true;
                     DrawMapWheel();
-                    tableLayoutPanel7.ColumnStyles[0].SizeType = SizeType.AutoSize;
-                    tableLayoutPanel7.ColumnStyles[0].Width = 0;
                     tableLayoutPanel8.ColumnStyles[0].SizeType = SizeType.AutoSize;
                     tableLayoutPanel8.ColumnStyles[0].Width = 0;
                 }
